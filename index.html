@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AdoptaVida · Adopción de mascotas con EDO</title>
+<link rel="stylesheet" href="css/styles.css"></head><body>
+<header><div class="wrap bar"><div class="brand"><span class="logo">🐾</span><div><h1>AdoptaVida</h1><small>Modelo de adopción de mascotas con EDO</small></div></div>
+<nav><a href="#problema">Problema</a><a href="#parametros">Parámetros</a><a href="#analitica">Solución</a><a href="#resultados">Resultados</a><a href="#tabla">Tabla</a><a href="#pasos">Pasos h y h/2</a><a href="#interpretacion">Interpretación</a></nav></div></header>
+<main class="wrap">
+<section id="problema" class="card"><h2>Problema</h2>
+<p>Los refugios comunitarios albergan perros y gatos que esperan un hogar. La adopción ocurre de forma progresiva y depende de la difusión de campañas, la participación ciudadana y el interés de las personas. Se modela la evolución de las adopciones acumuladas con una EDO de primer orden.</p>
+<div class="grid2"><div><b>Objetivo:</b> estimar el tiempo para adoptar al menos el 90 % de las mascotas disponibles y medir la precisión de Heun y RK4.</div>
+<div><b>Pregunta:</b> ¿Cuánto tarda un refugio en lograr el 90 % de adopciones y qué tan precisos son Heun y RK4?</div>
+<div><b>Beneficiarios:</b> refugios comunitarios, organizaciones de protección animal, voluntarios y ciudadanos interesados en la adopción responsable.</div>
+<div><b>Supuestos:</b> tasa de adopción proporcional a las mascotas pendientes (N−y); k constante; N fija; sin ingresos nuevos de animales.</div></div>
+<p class="note">⚠ Simulación matemática con parámetros hipotéticos. No son estadísticas reales de refugios bolivianos.</p></section>
+
+<section id="parametros" class="card"><h2>Panel de parámetros</h2>
+<div class="params">
+<label>Total de mascotas N <span>mascotas</span><input id="N" type="number" step="any"></label>
+<label>Adopciones iniciales y₀ <span>mascotas</span><input id="y0" type="number" step="any"></label>
+<label>Tasa de adopción k <span>días⁻¹</span><input id="k" type="number" step="any"></label>
+<label>Tiempo T <span>días</span><input id="T" type="number" step="any"></label>
+<label>Paso h <span>días</span><input id="h" type="number" step="any"></label></div>
+<div class="btns"><button id="sim">Simular</button><button id="reset" class="sec">Restablecer valores</button><button id="cmp" class="sec">Comparar tamaños de paso</button></div>
+<ul id="errors" class="errors" role="alert"></ul></section>
+
+<div id="out">
+<section id="analitica" class="card"><h2>Solución analítica</h2><div id="anBox"></div></section>
+<section id="resultados" class="card"><h2>Resultados numéricos</h2><div id="cards" class="cards"></div>
+<div class="chartbox"><canvas id="chart"></canvas></div></section>
+<section id="tabla" class="card"><h2>Tabla de iteraciones</h2>
+<div class="btns"><label class="inl">Coeficientes mostrados <select id="which"><option value="heun">Heun (k1, k2)</option><option value="rk4">RK4 (k1–k4)</option></select></label><button id="csv" class="sec">Exportar CSV</button></div>
+<div class="scroll"><table id="tbl"></table></div></section>
+<section id="pasos" class="card"><h2>Comparación de tamaños de paso</h2><p>Experimento A: h ingresado. Experimento B: h/2. Si el método es de orden p, al dividir h entre 2 el error debería dividirse aproximadamente entre 2<sup>p</sup>: ≈4 en Heun (p=2) y ≈16 en RK4 (p=4). RK4 evalúa la pendiente cuatro veces por paso y combina las evaluaciones para cancelar más términos del error de Taylor, por eso es mucho más preciso.</p>
+<div class="scroll"><table id="stepTbl"></table></div></section>
+<section id="interpretacion" class="card"><h2>Interpretación automática</h2><div id="interp"></div></section>
+</div></main>
+<footer><div class="wrap">AdoptaVida · Proyecto académico de ecuaciones diferenciales ordinarias · Parámetros hipotéticos</div></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="js/numerics.js"></script><script src="js/main.js"></script></body></html>
